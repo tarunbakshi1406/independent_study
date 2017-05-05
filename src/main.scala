@@ -35,9 +35,9 @@ object main {
           if (dataArray(3) != "null") { // checking for null locataion
             unver_total_tweets += 1
             unverified_locationSet += dataArray(3)
-            //we have to do this because we want to keep the original line break from input
+            //we have to do this because we want to keep the original line breaking from input
         
-           // By commenting out the below you will get the values without the null values
+           // By commenting out the below you will print the values without the null values
             /*   
             if (unverified_line_break.isEmpty) { //if line_break is empty, that means that this tweet has no line break so continue as normal
               print(unverified_strBuilder.toString() + "\n")
@@ -45,7 +45,7 @@ object main {
               print(unverified_line_break + line + "\n") // otherwise use the lineBreakTemp
             }
 */
-            // build map for statistics of user -> list of tweet from that user
+            // build map of user -> list of tweet from that user
             if(unverified_usertweetMap.contains(dataArray(1))){
               val tweetList = unverified_usertweetMap(dataArray(1)) += dataArray(2)
               unverified_usertweetMap(dataArray(1)) = tweetList
@@ -55,14 +55,14 @@ object main {
               unverified_usertweetMap += (dataArray(1) -> tweetList)
             }
 
-            // build map for statistics of tweet -> # of occurrence
+            // build map of tweet -> # of occurrence
             if(unverified_tweetOccurrenceMap.contains(dataArray(2))){
               unverified_tweetOccurrenceMap(dataArray(2)) = unverified_tweetOccurrenceMap(dataArray(2)) + 1
             } else {
               unverified_tweetOccurrenceMap += (dataArray(2) -> 1)
             }
           }
-          //reset all variables after we done processing one tweet
+          //reseting all variables after we done processing one tweet
           unverified_line_break = ""
           unverified_arrayCounter = 0
           unverified_strBuilder.setLength(0)
@@ -74,7 +74,7 @@ object main {
        //by commenting out the below line you will be getting the number of tweet occurences 
       //tweetOccurrenceMap.foreach(m => print(m._1 + " - " + m._2 + "\n"))
 
-     // by commenting out the below line you will be getting user and if there are any repeated tweets of his
+     // by commenting out the below line you will be getting user and most repeated tweet count
  //   unverified_usertweetMap.foreach(m => print(m._1 + " - " +  m._2.groupBy(k => k).reduce((a, b) => if(a._2.length > b._2.length) a else b)._2.length + "\n"))
 
       
@@ -105,7 +105,7 @@ object main {
               print(verified_line_break + line + "\n") // otherwise use the lineBreakTemp
             }
 */
-            // build map for statistics of user -> list of tweet from that user
+            // build map of user -> list of tweet from that user
             if(verified_usertweetMap.contains(dataArray(1))){
               val tweetList = verified_usertweetMap(dataArray(1)) += dataArray(2)
               verified_usertweetMap(dataArray(1)) = tweetList
@@ -115,7 +115,7 @@ object main {
               verified_usertweetMap += (dataArray(1) -> tweetList)
             }
 
-            // build map for statistics of tweet -> # of occurrence
+            // build map of tweet -> # of occurrence
             if(verified_tweetOccurrenceMap.contains(dataArray(2))){
               verified_tweetOccurrenceMap(dataArray(2)) = verified_tweetOccurrenceMap(dataArray(2)) + 1
             } else {
@@ -144,7 +144,7 @@ object main {
      //by commenting out the below line you will be generating username,number of unique tweets, total tweets of the user
    //  verified_usertweetMap.foreach(userMap => print(userMap._1 + ", " + userMap._2.distinct.size + ", " + userMap._2.size + "\n")) 
    
-   
+   //calculating various values for unverified file
       val uv_user_count = unverified_usertweetMap.size //this will give the unique user count for unverified users
       val uv_tweet_count = unverified_tweetOccurrenceMap.size //this will give the tweet count for unverified users
       val uv_location_count = unverified_locationSet.size // this will give the location count for unverified users
@@ -153,6 +153,9 @@ object main {
   val uv_geo_s_i = uv_location_count.toDouble / unver_total_tweets.toDouble // will give geographic spread index
  val uv_spam = uv_sum_rec.toDouble / unver_total_tweets.toDouble //will give spam index
        
+      
+      
+      //calculating various values for verified file
        val v_user_count = verified_usertweetMap.size //this will give the unique user count for verified users
       val v_tweet_count = verified_tweetOccurrenceMap.size //this will give the tweet count for verified users
       val v_location_count = verified_locationSet.size // this will give the location count for verified users
