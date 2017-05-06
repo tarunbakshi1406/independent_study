@@ -8,7 +8,7 @@ object main {
     if (args.length <2) {
       println("Missing arguements. Correct Usage: unverified verified")
     } else {
-     
+     //unverified processing
       val unverified_strBuilder = new StringBuilder
       val unverified_usertweetMap = scala.collection.mutable.Map[String, ListBuffer[String]]()
       val unverified_tweetOccurrenceMap = scala.collection.mutable.Map[String, Int]()
@@ -17,6 +17,8 @@ object main {
       var unverified_line_break = ""
       var unver_total_tweets = 0
       
+      
+      //verified processing
         val verified_strBuilder = new StringBuilder
       val verified_usertweetMap = scala.collection.mutable.Map[String, ListBuffer[String]]()
       val verified_tweetOccurrenceMap = scala.collection.mutable.Map[String, Int]()
@@ -131,9 +133,6 @@ object main {
         }
       }
       
-       val ver_size = verified_usertweetMap.size
-      val ver_tweet_size = verified_tweetOccurrenceMap.size
-      val ver_location_size = verified_locationSet.size
        //by commenting out the below line you will be getting the number of tweet occurences 
       //tweetOccurrenceMap.foreach(m => print(m._1 + " - " + m._2 + "\n"))
 
