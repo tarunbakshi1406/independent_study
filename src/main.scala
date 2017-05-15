@@ -8,8 +8,9 @@ object main {
     if (args.length < 2) {
       println("Missing arguements. Correct Usage: unverified verified")
     } else {
-
-      val unverified_strBuilder = new StringBuilder
+val name =Array("golf","nba","cricket")
+     for(i <-name){
+ val unverified_strBuilder = new StringBuilder
       val unverified_usertweetMap = scala.collection.mutable.Map[String, ListBuffer[String]]()
       val unverified_tweetOccurrenceMap = scala.collection.mutable.Map[String, Int]()
       val unverified_locationSet = scala.collection.mutable.Set[String]()
@@ -24,15 +25,16 @@ object main {
       var verified_array_counter = 0
       var verified_line_break = ""
       var ver_total_tweets = 0
-
       for (line <- Source.fromFile(args(0)).getLines()) {
+        
+        
         unverified_strBuilder.append(line)
         unverified_array_counter += line.split(",::,").length - 1
         //the reason for this array_counter is that parsing the input file contains multiple line break which would mess
         //with the ,::, ie our split so this will help us gather all the line break
         if (unverified_array_counter == 4) {
           val dataArray = unverified_strBuilder.toString().split(",::,")
-          if (dataArray(3) != "null") { // checking for null locataion
+          if (dataArray(3) != "null" && dataArray(2).toLowerCase().contains(i)) { // checking for null locataion
             unver_total_tweets += 1
             unverified_locationSet += dataArray(3)
             //we have to do this because we want to keep the original line break from input
@@ -72,7 +74,7 @@ object main {
         //with the ,::, so this will help us gather all the line break
         if (verified_array_counter == 4) {
           val dataArray = verified_strBuilder.toString().split(",::,")
-          if (dataArray(3) != "null") { // check for null locataion
+          if (dataArray(3) != "null" && dataArray(2).toLowerCase().contains(i)) { // check for null locataion
             ver_total_tweets += 1
             verified_locationSet += dataArray(3)
             //we have to do this because we want to keep the original line break from input
@@ -118,7 +120,7 @@ object main {
       val v_diffusion_index = v_user_count.toDouble / ver_total_tweets.toDouble //calculating the diffusion index
       val v_geo_s_i = v_location_count.toDouble / ver_total_tweets.toDouble // will give geographic spread index
       val v_spam = v_sum_rec.toDouble / ver_total_tweets.toDouble //will give spam index
-
+      print(s"veracity for $i \n \n")
       print("|------------------------------------------------------------------------------------|" + "\n")
       print("|content                           | unverifed                 | verified            | " + "\n")
       print("|------------------------------------------------------------------------------------|" + "\n")
@@ -136,6 +138,6 @@ object main {
       print("|------------------------------------------------------------------------------------|" + "\n")
 
     }
+}
   }
 }
-
