@@ -9,6 +9,7 @@ object main {
       println("Missing arguements. Correct Usage: unverified verified")
     } else {
 val name =Array("golf","nba","cricket")
+      // by adding golf,nba and cricket we are able to extract the tweets that contain only those keywords seperately
      for(i <-name){
  val unverified_strBuilder = new StringBuilder
       val unverified_usertweetMap = scala.collection.mutable.Map[String, ListBuffer[String]]()
